@@ -19,9 +19,11 @@ exports.handler = async (event) => {
        response = await registerService.register(registerBody)
        break;
        case event.httpMethod === 'POST' && event.path == loginPath:
-       response = util.buildResponse(200);
+       response = loginService.login(loginBody)
        break;
        case event.httpMethod === 'POST' && event.path == verifyPath:
+           const verifyBody = JSON.parse(event.body);
+           response = verifyService.verify(verifyBody)
        response = util.buildResponse(200);
        break;
        default:
